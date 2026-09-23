@@ -1,0 +1,15 @@
+{
+  "name": "willyar68",
+  "description": "Claude Code plugins by Guillermo Salgado.",
+  "owner": { "name": "Guillermo Salgado", "url": "https://github.com/WillyAR68" },
+  "plugins": [
+    {
+      "name": "no-false-flags",
+      "source": "./",
+      "description": "Stay on the top Claude model. Fewer false-positive safety stops on legitimate work.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": ["safety-classifier", "false-positive", "context-engineering"]
+    }
+  ]
+}

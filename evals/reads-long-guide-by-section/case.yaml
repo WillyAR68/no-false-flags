@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: reads-long-guide-by-section
+description: A 250-line guide is needed for one feature. The agent should index it and read only the relevant sections, not the whole file.
+tags: [bring-in]
+context:
+  scaffold_script: fixture.sh

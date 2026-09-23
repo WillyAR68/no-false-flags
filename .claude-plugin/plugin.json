@@ -1,0 +1,10 @@
+{
+  "name": "no-false-flags",
+  "description": "Stay on the top Claude model. Fewer false-positive safety stops on legitimate work: what to bring into the conversation, how to deliver the request, how to shape the response, and how to recover when a response is stopped.",
+  "version": "1.0.0",
+  "author": { "name": "Guillermo Salgado", "url": "https://github.com/WillyAR68" },
+  "homepage": "https://github.com/WillyAR68/no-false-flags",
+  "repository": "https://github.com/WillyAR68/no-false-flags",
+  "license": "MIT",
+  "keywords": ["claude-code", "skill", "safety-classifier", "false-positive", "context-engineering", "opus", "fallback"]
+}
