@@ -13,7 +13,10 @@ cuts the surface a safety check can react to on legitimate work.
 ## The audit
 
 1. **List everything that always loads.** The global rules directory, the root
-   `CLAUDE.md`, any always-on memory.
+   `CLAUDE.md`, any always-on memory, and **memory indexes and summaries** (such as
+   `MEMORY.md`). An index line is paid in every session even when the file it
+   points to loads on demand, so one alarming summary line is enough to trip the
+   check on every first message.
 2. **Measure the size.** A rough line/token count per file and the total. If the
    total is large, that is the budget spent on every task, relevant or not.
 3. **Run the four checklist questions on each file** (short? cross-cutting?
@@ -31,6 +34,21 @@ cuts the surface a safety check can react to on legitimate work.
 5. **Propose, do not apply silently.** For each flagged file give a verdict:
    keep / shorten / demote to `references/` / move to project memory / turn into a
    hook or permission / delete.
+
+## Measure without dumping, edit without re-exposing
+
+The surface you are auditing is the surface that trips the check. Reading it into
+the conversation re-injects it, and the session can get stopped in the middle of
+the cleanup.
+
+- **Measure:** `grep -il <term> <files>` lists the files that match, `grep -c`
+  counts matching lines per file. Names and counts only; do not print the lines.
+- **Locate:** `grep -n` on the one file to fix gives line numbers. Show the user the
+  file name and line number, not the line.
+- **Edit:** replace that exact line with Edit, written by its purpose (see
+  [framing-intent.md](framing-intent.md)). Do not Read the whole file or paste the
+  block around it.
+- **Verify:** the same `grep -c` now returns 0 for that file.
 
 ## Output
 

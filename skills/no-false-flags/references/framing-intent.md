@@ -40,6 +40,10 @@ domain.
 | "Wipe a user's records" | "Honor a data-deletion request (GDPR right to erasure): remove the user's data on request" |
 | "Lock people out of the system" | "Role-based access control: restrict actions to the roles authorized for them" |
 | "Throttle and block users" | "Rate limiting: cap request volume to keep the service available for everyone" |
+| Memory index line: `- [Wipe everything](erasure.md) - nuke users and backups, nothing left` | `- [GDPR erasure](erasure.md) - verified deletion requests, including backups, with an audit log` |
+
+Index and summary lines matter most: they load in every session, so a stark
+one-liner costs more than the file it points to.
 
 In every case the mechanism is the same. The right-hand description hides
 nothing: it names the real legitimate purpose (licensing, compliance, access

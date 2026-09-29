@@ -14,6 +14,10 @@ plainly. Nothing here bypasses a check or guarantees zero stops.
 A new message in the same session usually re-triggers the check, and so does
 `--continue` / `--resume`. Recovery means removing content, not insisting.
 
+**Stops that recur across sessions on legitimate work, or a request to "make it
+stop happening":** recovery alone treats the symptom. Do section 5 now, then
+recover the current session.
+
 1. Tell the user in one line: it was the safety check, not a tool error.
 2. Find material the task does not need (a document from another task, long
    pastes). Refer to it **by file name only**; describing it puts it back in.
@@ -55,10 +59,20 @@ Read-only exploration can proceed; nothing irreversible runs before confirmation
 Answer at the scope asked, in the task's own domain. No unrequested background or
 tutorials; no material from an earlier, unrelated task.
 
-## 5. Clean from the start
+## 5. Clean from the start (the cause)
 
-Keep always-loaded rules short; move long or single-domain material to on-demand
-references. See [loading layers](references/loading-layers.md),
+What loads every session (rules, CLAUDE.md, memory indexes such as MEMORY.md) is
+the usual cause of recurring stops. One alarming line in an index is paid every
+session, even when its file loads on demand.
+
+1. **Measure without dumping:** list those files and find flagged lines with
+   `grep -il` / `grep -c` (names and counts only). Never Read or paste them.
+2. **Rewrite by purpose:** each flagged line says what the work is for, in the
+   domain's professional terms.
+3. **Demote** long or single-domain material to on-demand references.
+4. **Edit without re-exposing:** change only those lines with Edit.
+
+See [loading layers](references/loading-layers.md),
 [surface audit](references/surface-audit.md), [demotion](references/demotion.md),
 [intent lines](references/framing-intent.md), [limits](references/false-positives.md).
 Sources: [errors](https://code.claude.com/docs/en/errors),

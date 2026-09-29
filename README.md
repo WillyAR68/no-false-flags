@@ -69,6 +69,7 @@ One skill and two small hooks:
 |---|---|
 | **A response gets stopped** | Claude stops working in the flagged conversation and names the unneeded file, never its content. Then it gets you out cleanly: `/rewind` to before the turn that brought it in, or a pointer-only handoff and `/clear`, then `/model` back. |
 | **The model falls back on its own** | A `PostModelSwitch` hook tells Claude to start that recovery right away instead of carrying on. |
+| **Stops keep coming back across sessions** | Claude goes after the cause: the context that loads in every session (rules, CLAUDE.md, memory index lines). It finds flagged lines by file name and count only, rewrites them by their purpose, and edits just those lines, without reading them into the chat. |
 | **A long document is about to be read whole** | A `PreToolUse` hook stops the whole-file read of long `.md`, `.txt`, `.rst` and `.adoc` files. Claude greps the headings and reads only the sections the task needs. |
 | **You ask it to "just disguise it"** | It refuses to reword or obfuscate, and gives you the legitimate way forward. |
 | **A terse request touches a sensitive domain** | It restates it as one line you can confirm: action, data, purpose (asked, not assumed), safeguards. |
@@ -92,13 +93,16 @@ each case with and without the plugin, 3 runs per arm:
 | Case | Without | With |
 |---|---|---|
 | `recovers-after-stop` | 0% to 33% | **100%** |
-| `reads-long-guide-by-section` | 25% | **100%** |
+| `reads-long-guide-by-section` | 17% to 25% | **100%** |
+| `treats-recurring-cause` | 0% to 67% | **100%** |
 | `declines-disguising` | 100% | 100% |
 | `restates-terse-request` | 100% | 100% |
-| `restates-terse-request-es` (Spanish) | 100% | 100% |
+| `restates-terse-request-es` (Spanish) | 100% | 78% to 100% |
 
-The last three already pass without the plugin in a clean eval session and stay as
-regression checks. The fallback hook is unit-tested; an eval cannot trigger a real
+The last three score about the same with and without the plugin in a clean eval
+session and stay as regression checks. Scores use the default eval judge; with a
+stricter judge (Sonnet), `recovers-after-stop` fails in both arms alike, which
+points at the grader, not the plugin. Ranges cover the runs for v1.0 and v1.1. The fallback hook is unit-tested; an eval cannot trigger a real
 safety fallback. Run the suite yourself:
 
 ```

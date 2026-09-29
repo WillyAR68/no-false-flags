@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.1.0
+
+- Recurring stops on legitimate work, or a request to make them stop, now trigger
+  the fix for the cause (the always-loaded context), not only rewind and /clear.
+- Memory indexes and summaries (such as MEMORY.md) are named as part of the
+  always-loaded surface: one line there loads in every session.
+- Safe audit technique: measure with file names and counts (`grep -il`, `grep -c`),
+  edit only the flagged lines, never read the suspected content into the chat.
+- Example of a memory index line rewritten by its purpose.
+- New eval case `treats-recurring-cause`: 0-67% without the plugin, 100% with it.
+
 ## 1.0.0
 
 - First public release as `no-false-flags`.
