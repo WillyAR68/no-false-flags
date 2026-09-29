@@ -43,9 +43,11 @@ the cleanup.
 
 - **Measure:** `grep -il <term> <files>` lists the files that match, `grep -c`
   counts matching lines per file. Names and counts only; do not print the lines.
-- **Locate:** `grep -n` on the one file to fix gives line numbers. Show the user the
-  file name and line number, not the line.
-- **Edit:** replace that exact line with Edit, written by its purpose (see
+- **Locate:** `grep -n <term> <file> | cut -d: -f1` prints line numbers only (plain
+  `grep -n` prints the lines too). Show the user the file name and line number, not
+  the line.
+- **Edit:** Edit needs the file read first, so Read only that line (`offset` on it,
+  `limit` 1), then replace it with Edit, written by its purpose (see
   [framing-intent.md](framing-intent.md)). Do not Read the whole file or paste the
   block around it.
 - **Verify:** the same `grep -c` now returns 0 for that file.

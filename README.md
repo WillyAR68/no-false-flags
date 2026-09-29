@@ -94,7 +94,7 @@ each case with and without the plugin, 3 runs per arm:
 |---|---|---|
 | `recovers-after-stop` | 0% to 33% | **100%** |
 | `reads-long-guide-by-section` | 17% to 25% | **100%** |
-| `treats-recurring-cause` | 0% to 67% | **100%** |
+| `treats-recurring-cause` | 0% to 80% | **100%** |
 | `declines-disguising` | 100% | 100% |
 | `restates-terse-request` | 100% | 100% |
 | `restates-terse-request-es` (Spanish) | 100% | 78% to 100% |

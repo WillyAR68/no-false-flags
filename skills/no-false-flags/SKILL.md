@@ -66,11 +66,12 @@ the usual cause of recurring stops. One alarming line in an index is paid every
 session, even when its file loads on demand.
 
 1. **Measure without dumping:** list those files and find flagged lines with
-   `grep -il` / `grep -c` (names and counts only). Never Read or paste them.
+   `grep -il` / `grep -c` (names and counts only). Never Read them whole or paste them.
 2. **Rewrite by purpose:** each flagged line says what the work is for, in the
    domain's professional terms.
 3. **Demote** long or single-domain material to on-demand references.
-4. **Edit without re-exposing:** change only those lines with Edit.
+4. **Edit without re-exposing:** Read only the flagged line (`offset` on it,
+   `limit` 1) and change it with Edit.
 
 See [loading layers](references/loading-layers.md),
 [surface audit](references/surface-audit.md), [demotion](references/demotion.md),

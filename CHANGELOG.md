@@ -9,7 +9,8 @@
 - Safe audit technique: measure with file names and counts (`grep -il`, `grep -c`),
   edit only the flagged lines, never read the suspected content into the chat.
 - Example of a memory index line rewritten by its purpose.
-- New eval case `treats-recurring-cause`: 0-67% without the plugin, 100% with it.
+- New eval case `treats-recurring-cause`: 0-80% without the plugin, 100% with it
+  (5 of 5 runs).
 
 ## 1.0.0
 
