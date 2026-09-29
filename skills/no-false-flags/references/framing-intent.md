@@ -42,6 +42,17 @@ domain.
 | "Throttle and block users" | "Rate limiting: cap request volume to keep the service available for everyone" |
 | Memory index line: `- [Wipe everything](erasure.md) - nuke users and backups, nothing left` | `- [GDPR erasure](erasure.md) - verified deletion requests, including backups, with an audit log` |
 
+Kickoff prompt pasted at the start of each session, before and after:
+
+- Before: `connect to the old box with the admin password and move everything to the new host tonight`
+- After: `Project: our reports app (we own the app and both hosts). Task: migrate its
+  database from the old VM to the new cloud host, as planned in Brain/04. Safeguards:
+  backup first, dry run, rollback to the old connection string. Credentials stay in
+  .env; read the file path, never paste them.`
+
+The second one adds only facts that were true all along: who owns the systems,
+what the work is for, and how it stays reversible.
+
 Index and summary lines matter most: they load in every session, so a stark
 one-liner costs more than the file it points to.
 

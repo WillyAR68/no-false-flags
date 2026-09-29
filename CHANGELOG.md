@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.2.0
+
+- The read hook now works for whole folders in any language: it redirects
+  whole-file reads of docs over 80 lines (was 150), a second whole-file read from
+  the same folder, and whole-file reads past 300 lines per session.
+- A stop on the first request of a session is answered with the confirmable task
+  line instead of abandoning the request; the fallback hook says so.
+- The list of sensitive domains now covers servers, remote access, migrations,
+  credentials, third-party sites, security testing, monitoring, and financial,
+  health or legal data. Project docs read at every start and pasted kickoff
+  prompts count as always-loaded surface; new kickoff prompt example.
+- Four new eval cases. Measured on Opus 5.5: a short infrastructure request was
+  stopped on the first response in 12 of 12 runs with or without the plugin; the
+  same request with its context written in it, 0 of 6; with that context only in
+  CLAUDE.md or added by a hook, 6 of 6. The context has to be in the request.
+
 ## 1.1.0
 
 - Recurring stops on legitimate work, or a request to make them stop, now trigger

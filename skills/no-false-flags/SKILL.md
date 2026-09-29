@@ -1,6 +1,6 @@
 ---
 name: no-false-flags
-description: Use when a response was "stopped by a safety classifier" or "withheld", when a notice says "safeguards flagged this session" and another model "is answering instead", when legitimate work keeps getting flagged, or before reading a long document or acting on a terse request in a sensitive domain.
+description: Use when a response was "stopped by a safety classifier" or "withheld", when a notice says "safeguards flagged this session" and another model "is answering instead", when legitimate work keeps getting flagged, before reading a long document or a whole folder of docs, or before acting on a short request that touches servers, credentials, data or people.
 ---
 
 # No False Flags
@@ -25,8 +25,11 @@ recover the current session.
 4. **Not identifiable, or second stop:** stop working here. Write a handoff (goal,
    decisions, state, pending; file pointers, never content; files NOT to open).
    Ask for `/clear` or a new session without `--continue`. Do not keep going here.
-5. **First request of a session:** always-loaded context (CLAUDE.md, rules,
-   memory) may be the trigger; suggest `claude --safe-mode` to confirm.
+5. **Stop on the first request of a session:** the request usually lacked
+   context. Answer it now with the section 3 task line, and suggest re-sending
+   it completed (what it is, whose it is, what it is for) in a new session. If
+   complete requests still stop, always-loaded context may be the trigger;
+   `claude --safe-mode` confirms.
 6. **After an automatic fallback:** once clean, `/model` returns to the original.
 7. **Still stopped in a clean session:** suggest `/feedback`; for legitimate
    security work, Anthropic's Cyber Verification Program.
@@ -41,17 +44,23 @@ keywords with line numbers, then Read only those sections with `offset`/`limit`.
 Quote only the lines you act on. "It fits in one read" is not the test: every
 section read stays in the conversation.
 
+Asked to read a whole folder first (CLAUDE.md and all of `Brain/`, say): read
+CLAUDE.md, Grep each doc's headings, Read only what the first task needs, and say
+in one line that the rest is read when a step needs it.
+
 ## 3. Delivering the request
 
-If a short or ambiguous request touches a sensitive domain (deleting data,
-suspending accounts, access control, licensing, bulk actions on people), restate
-it first, in the user's language, as one confirmable line:
+If a short or ambiguous request touches a sensitive domain (servers, remote
+access, migrations, credentials; deleting data; accounts and access control;
+licensing; automation on third-party sites; security testing; monitoring people;
+financial, health or legal data; bulk actions on people), restate it first, in
+the user's language, as one confirmable line:
 
-> Task: <action> on <object>, owned by <whom>, for <purpose>.
-> Safeguards: <dry-run / confirmation / audit log / rollback>.
+> Task: <action> on <object>, which is <whose>, for <purpose>.
+> Safeguards: <backup / dry-run / confirmation / audit log / rollback>.
 
-Use the domain's professional terms, not euphemisms. The purpose comes from the
-user: if unstated, write it as a question. Ask about ownership if not evident.
+Use the domain's professional terms, not euphemisms. Whose it is and what it is
+for are facts the user supplies: if unstated, ask; never assume them. The user's own work is stated too ("my own app").
 Read-only exploration can proceed; nothing irreversible runs before confirmation.
 
 ## 4. Shaping the response
@@ -63,7 +72,13 @@ tutorials; no material from an earlier, unrelated task.
 
 What loads every session (rules, CLAUDE.md, memory indexes such as MEMORY.md) is
 the usual cause of recurring stops. One alarming line in an index is paid every
-session, even when its file loads on demand.
+session, even when its file loads on demand. So are the project docs read at
+every start (`Brain/`, plans) and the kickoff prompt pasted each session.
+
+**The request carries its own context.** Measured: a short request was stopped
+even with its context in CLAUDE.md; the same request stating what the work is,
+whose it is and what it is for was not. Keep that line in the kickoff prompt the
+user pastes, not only in CLAUDE.md.
 
 1. **Measure without dumping:** list those files and find flagged lines with
    `grep -il` / `grep -c` (names and counts only). Never Read them whole or paste them.

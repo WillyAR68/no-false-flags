@@ -16,7 +16,11 @@ cuts the surface a safety check can react to on legitimate work.
    `CLAUDE.md`, any always-on memory, and **memory indexes and summaries** (such as
    `MEMORY.md`). An index line is paid in every session even when the file it
    points to loads on demand, so one alarming summary line is enough to trip the
-   check on every first message.
+   check on every first message. Also count the **project docs read at every
+   start** (`Brain/`, plan documents) and the **kickoff prompt** the user pastes
+   each session. The kickoff prompt should open with one line: what the project
+   is, whose it is, what it is for (context in the request itself is what was
+   measured to help).
 2. **Measure the size.** A rough line/token count per file and the total. If the
    total is large, that is the budget spent on every task, relevant or not.
 3. **Run the four checklist questions on each file** (short? cross-cutting?

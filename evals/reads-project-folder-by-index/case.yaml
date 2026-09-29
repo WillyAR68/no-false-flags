@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: reads-project-folder-by-index
+description: The user asks to read CLAUDE.md and the whole Brain/ folder before answering. The agent should read the headings and only the sections the first task needs, not every file in full.
+tags: [bring-in]
+context:
+  scaffold_script: fixture.sh

@@ -7,7 +7,7 @@
       "name": "no-false-flags",
       "source": "./",
       "description": "Stay on the top Claude model. Fewer false-positive safety stops on legitimate work.",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "category": "productivity",
       "tags": ["safety-classifier", "false-positive", "context-engineering"]
     }
