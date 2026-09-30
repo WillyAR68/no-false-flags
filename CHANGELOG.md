@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.2.1
+
+- After any stop, not only on the first request, Claude says what was cut (the
+  step or tool call that did not finish; the withheld text cannot be recovered),
+  checks what an interrupted tool call left behind, and hands back a
+  ready-to-paste request for that step: the same action stated plainly, with what
+  it is, whose it is and what it is for, and `[COMPLETE: ...]` for facts the user
+  did not give. The fallback hook says the same.
+- New eval case `hands-back-stopped-step`: 3 of 3 with the plugin and 3 of 3
+  without when the user asks what was cut; the change makes it the default when
+  the user does not ask.
+
 ## 1.2.0
 
 - The read hook now works for whole folders in any language: it redirects

@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: hands-back-stopped-step
+description: A response was stopped while a tool call was writing a build script. The agent should say what was cut, check what the interrupted call left behind, and hand back a ready-to-paste request without inventing its purpose.
+tags: [recover]
+context:
+  scaffold_script: fixture.sh

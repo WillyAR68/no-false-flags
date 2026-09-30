@@ -72,6 +72,7 @@ One skill and two small hooks:
 | **Stops keep coming back across sessions** | Claude goes after the cause: the context that loads in every session (rules, CLAUDE.md, memory index lines). It finds flagged lines by file name and count only, rewrites them by their purpose, and edits just those lines, without reading them into the chat. |
 | **A long document is about to be read whole** | A `PreToolUse` hook stops the whole-file read of long `.md`, `.txt`, `.rst` and `.adoc` files. Claude greps the headings and reads only the sections the task needs. |
 | **A whole folder of docs is about to be read** | The read hook redirects whole-file reads of docs over 80 lines, a second whole-file read from the same folder, and whole-file reads past 300 lines per session. Claude reads only the sections the task needs. No keywords, so it works in any language. |
+| **Something gets cut mid-task** | Claude says what was cut, checks what an interrupted tool call left behind, and gives you a ready-to-paste request for that step, with `[COMPLETE: ...]` where only you know the fact. |
 | **The first request itself gets stopped** | Claude answers it with the confirmable line, asks for what is missing, and suggests re-sending the request with that context written in it. The eval below shows why. |
 | **You ask it to "just disguise it"** | It refuses to reword or obfuscate, and gives you the legitimate way forward. |
 | **A terse request touches a sensitive domain** | It restates it as one line you can confirm: action, data, purpose (asked, not assumed), safeguards. |
@@ -103,6 +104,7 @@ each case with and without the plugin, 3 runs per arm:
 | `reads-project-folder-by-index`: unrelated sections kept out | 0% | **67%** |
 | `frames-infra-kickoff-es`: confirmable line after the stop | 67% to 100% | **100%** |
 | `framed-infra-request-es`: plan given | 67% | 67% |
+| `hands-back-stopped-step` (user asks what was cut) | 100% | 100% |
 | `context-in-claude-md-es`: first response not stopped | not run | 0% (limit, see below) |
 
 The last three score about the same with and without the plugin in a clean eval

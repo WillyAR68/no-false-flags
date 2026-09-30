@@ -19,19 +19,25 @@ stop happening":** recovery alone treats the symptom. Do section 5 now, then
 recover the current session.
 
 1. Tell the user in one line: it was the safety check, not a tool error.
-2. Find material the task does not need (a document from another task, long
+2. **Say what was cut:** the step or tool call that did not finish; the withheld
+   text cannot be recovered. For an interrupted tool call, check its effect (does
+   the file or change exist, whole or partial) by name, size or git status, and
+   say so.
+3. **Hand back the stopped step:** if it was legitimate work, give the user a
+   ready-to-paste request for it, in their language: the same action stated
+   plainly, plus what it is, whose it is and what it is for. Mark any fact the
+   user did not give as `[COMPLETE: ...]`; never fill it in.
+4. Find material the task does not need (a document from another task, long
    pastes). Refer to it **by file name only**; describing it puts it back in.
-3. **Turn identifiable:** ask the user for Esc twice or `/rewind` to before it.
-4. **Not identifiable, or second stop:** stop working here. Write a handoff (goal,
+5. **Turn identifiable:** ask the user for Esc twice or `/rewind` to before it.
+6. **Not identifiable, or second stop:** stop working here. Write a handoff (goal,
    decisions, state, pending; file pointers, never content; files NOT to open).
    Ask for `/clear` or a new session without `--continue`. Do not keep going here.
-5. **Stop on the first request of a session:** the request usually lacked
-   context. Answer it now with the section 3 task line, and suggest re-sending
-   it completed (what it is, whose it is, what it is for) in a new session. If
-   complete requests still stop, always-loaded context may be the trigger;
-   `claude --safe-mode` confirms.
-6. **After an automatic fallback:** once clean, `/model` returns to the original.
-7. **Still stopped in a clean session:** suggest `/feedback`; for legitimate
+7. **Stop on the first request of a session:** the request usually lacked
+   context; step 3 is the answer. If complete requests still stop,
+   always-loaded context may be the trigger; `claude --safe-mode` confirms.
+8. **After an automatic fallback:** once clean, `/model` returns to the original.
+9. **Still stopped in a clean session:** suggest `/feedback`; for legitimate
    security work, Anthropic's Cyber Verification Program.
 
 Never reword, use euphemisms, or obfuscate to get past the check. If asked, decline
