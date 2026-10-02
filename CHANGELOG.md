@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.2.2
+
+- The fallback hook checks whether a `SessionStart` hook loaded text from an
+  earlier stopped session into this one (a saved session summary, say). If so, it
+  tells the user directly, not only Claude, which file it came from and that
+  `/clear` will not help until that file is moved aside or the hook is off. Found
+  in real use: a session-summary hook reloaded a stopped session after `/clear`,
+  and a plain first message was stopped again.
+- The skill and the surface audit count `SessionStart` hook output as
+  always-loaded surface.
+
 ## 1.2.1
 
 - After any stop, not only on the first request, Claude says what was cut (the

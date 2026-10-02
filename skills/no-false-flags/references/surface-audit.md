@@ -13,7 +13,8 @@ cuts the surface a safety check can react to on legitimate work.
 ## The audit
 
 1. **List everything that always loads.** The global rules directory, the root
-   `CLAUDE.md`, any always-on memory, and **memory indexes and summaries** (such as
+   `CLAUDE.md`, the output of `SessionStart` hooks (a saved summary of the last
+   session reloads its stopped text after `/clear`), any always-on memory, and **memory indexes and summaries** (such as
    `MEMORY.md`). An index line is paid in every session even when the file it
    points to loads on demand, so one alarming summary line is enough to trip the
    check on every first message. Also count the **project docs read at every

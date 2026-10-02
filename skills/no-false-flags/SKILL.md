@@ -33,6 +33,9 @@ recover the current session.
 6. **Not identifiable, or second stop:** stop working here. Write a handoff (goal,
    decisions, state, pending; file pointers, never content; files NOT to open).
    Ask for `/clear` or a new session without `--continue`. Do not keep going here.
+   A hook that loads the previous session at start (a saved session summary)
+   brings the stop back after `/clear`: move that file aside or turn the hook off
+   first. The fallback hook detects it and tells the user.
 7. **Stop on the first request of a session:** the request usually lacked
    context; step 3 is the answer. If complete requests still stop,
    always-loaded context may be the trigger; `claude --safe-mode` confirms.
