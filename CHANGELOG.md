@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.3.0
+
+- Correctness fix. The fallback hook no longer asserts that a reloaded
+  previous-session summary caused the stop. It names that file only as a possible
+  contributor, and only after verifying the file still exists on disk and still
+  contains the stop text — which removes a false positive where the hook blamed a
+  summary that no longer carried any stop.
+- The skill no longer tells Claude to "turn the reload off yourself" as if the
+  cause were known. It verifies before blaming, does only the safe local fix
+  (moving a confirmed file), and asks before any global settings change.
+- Both the skill and the hook now state the honest order of likely contributors
+  and that a sensitive conversation topic trips the check on the top model with
+  no setting or skill able to prevent it — the fallback model is where such work
+  continues.
+
 ## 1.2.3
 
 - Fix, do not assign: after a stop, Claude does every reversible fix itself and

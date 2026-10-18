@@ -73,7 +73,7 @@ One skill and two small hooks:
 | **A long document is about to be read whole** | A `PreToolUse` hook stops the whole-file read of long `.md`, `.txt`, `.rst` and `.adoc` files. Claude greps the headings and reads only the sections the task needs. |
 | **A whole folder of docs is about to be read** | The read hook redirects whole-file reads of docs over 80 lines, a second whole-file read from the same folder, and whole-file reads past 300 lines per session. Claude reads only the sections the task needs. No keywords, so it works in any language. |
 | **Something gets cut mid-task** | Claude says what was cut, checks what an interrupted tool call left behind, and gives you a ready-to-paste request for that step, with `[COMPLETE: ...]` where only you know the fact. |
-| **`/clear` does not stop the stops** | The fallback hook checks whether a hook that runs at session start (a saved session summary, say) reloaded an earlier stopped session. If so, it tells you on screen, and Claude turns that reload off itself: it moves the saved files that carry the stop to a backup folder and turns off the hook's start-up load (for everything-claude-code, `ECC_DISABLED_HOOKS=session:start`), then says what changed and how to undo it. |
+| **`/clear` does not stop the stops** | The fallback hook names a reloaded previous-session summary as a *possible* contributor — only when that file still exists and still contains the stop text — without claiming it is the cause. Claude can move that file (a safe local fix) and asks before any global settings change. |
 | **The first request itself gets stopped** | Claude answers it with the confirmable line, asks for what is missing, and suggests re-sending the request with that context written in it. The eval below shows why. |
 | **You ask it to "just disguise it"** | It refuses to reword or obfuscate, and gives you the legitimate way forward. |
 | **A terse request touches a sensitive domain** | It restates it as one line you can confirm: action, data, purpose (asked, not assumed), safeguards. |
@@ -112,6 +112,14 @@ The last three score about the same with and without the plugin in a clean eval
 session and stay as regression checks. Scores use the default eval judge; with a
 stricter judge (Sonnet), `recovers-after-stop` fails in both arms alike, which
 points at the grader, not the plugin. Ranges cover the runs for v1.0 to v1.2.
+
+**Honest limit.** No skill turns the classifier off. When the conversation's own
+topic is a sensitive domain (security, credentials, software protection,
+biology), the top model stops the response and falls back; this plugin does not
+prevent that and never rewords a request to get past it. What it does: recover
+cleanly, keep unneeded material out, state a sensitive request with its context,
+and — only when verified — point at a reloaded summary. It never asserts a cause
+it cannot know.
 
 **What stops a first response, measured (v1.2, Opus 5.5):** a short request to use
 the root password of a client's server and move everything to a new VM was stopped

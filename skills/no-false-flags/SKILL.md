@@ -18,9 +18,18 @@ A new message in the same session usually re-triggers the check, and so does
 stop happening":** recovery alone treats the symptom. Do section 5 now, then
 recover the current session.
 
-**Fix, do not assign.** Do every reversible fix yourself in this turn and report
-it in one line each. Ask the user only for what only they can do (Esc, `/rewind`,
-`/clear`, facts only they know). Keep the reply short.
+**Fix, do not assign — but do not assert a cause.** What the check reacted to
+cannot be known from here. Do the reversible fixes you can *verify*, report each
+in one line, and name untested guesses as guesses. Ask the user only for what
+only they can do (Esc, `/rewind`, `/clear`, a global-settings change, facts only
+they know). Keep the reply short.
+
+The honest order of likely contributors: material from another task still in the
+conversation; **the topic itself being a sensitive domain** (security,
+credentials, software protection or anti-tamper, biology) — this trips the check
+on the top model and no setting or skill stops it, so the fallback model (no such
+classifier) is often where the work continues; and, less often, a reloaded
+previous-session summary.
 
 1. Tell the user in one line: it was the safety check, not a tool error.
 2. **Say what was cut:** the step or tool call that did not finish; the withheld
@@ -37,13 +46,14 @@ it in one line each. Ask the user only for what only they can do (Esc, `/rewind`
 6. **Not identifiable, or second stop:** stop working here. Write a handoff (goal,
    decisions, state, pending; file pointers, never content; files NOT to open).
    Ask for `/clear` or a new session without `--continue`. Do not keep going here.
-   A hook that loads the previous session at start (a saved session summary)
-   brings the stop back after `/clear`, and saves a new summary at every session
-   end. The fallback hook detects it. Turn it off yourself: move the saved files
-   that carry the stop to a backup folder, and turn off that hook's start-up load
-   (everything-claude-code: `"ECC_DISABLED_HOOKS": "session:start"` under `env`
-   in `~/.claude/settings.json`, appended if the key exists). Say what changed
-   and how to undo it.
+   A hook that loads the previous session at start (a saved session summary) can
+   bring an old stop back after `/clear`. Verify before blaming it: the named
+   file must still exist and still contain the stop text. If so, moving it to a
+   backup folder is a safe local fix you can do. It regenerates at session end,
+   so the lasting fix is a global switch (everything-claude-code:
+   `"ECC_DISABLED_HOOKS": "session:start"` under `env` in
+   `~/.claude/settings.json`) — **ask first; it changes every project.** Say this
+   may not be the cause: a sensitive topic trips the check regardless.
 7. **Stop on the first request of a session:** the request usually lacked
    context; step 3 is the answer. If complete requests still stop,
    always-loaded context may be the trigger; `claude --safe-mode` confirms.
