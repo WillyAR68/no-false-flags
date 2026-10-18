@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.2.3
+
+- Fix, do not assign: after a stop, Claude does every reversible fix itself and
+  asks the user only for what only they can do (Esc, `/rewind`, `/clear`, facts
+  only they know). Found in real use: a correct diagnosis read as homework.
+- When a session-start hook reloaded an earlier stopped session, Claude now turns
+  that reload off itself: it moves the saved files that carry the stop to a backup
+  folder and turns off the hook's start-up load. For everything-claude-code the
+  fallback hook names the switch (`ECC_DISABLED_HOOKS=session:start`), because
+  that hook saves a new summary at every session end and moving files alone does
+  not last.
+
 ## 1.2.2
 
 - The fallback hook checks whether a `SessionStart` hook loaded text from an

@@ -18,6 +18,10 @@ A new message in the same session usually re-triggers the check, and so does
 stop happening":** recovery alone treats the symptom. Do section 5 now, then
 recover the current session.
 
+**Fix, do not assign.** Do every reversible fix yourself in this turn and report
+it in one line each. Ask the user only for what only they can do (Esc, `/rewind`,
+`/clear`, facts only they know). Keep the reply short.
+
 1. Tell the user in one line: it was the safety check, not a tool error.
 2. **Say what was cut:** the step or tool call that did not finish; the withheld
    text cannot be recovered. For an interrupted tool call, check its effect (does
@@ -34,8 +38,12 @@ recover the current session.
    decisions, state, pending; file pointers, never content; files NOT to open).
    Ask for `/clear` or a new session without `--continue`. Do not keep going here.
    A hook that loads the previous session at start (a saved session summary)
-   brings the stop back after `/clear`: move that file aside or turn the hook off
-   first. The fallback hook detects it and tells the user.
+   brings the stop back after `/clear`, and saves a new summary at every session
+   end. The fallback hook detects it. Turn it off yourself: move the saved files
+   that carry the stop to a backup folder, and turn off that hook's start-up load
+   (everything-claude-code: `"ECC_DISABLED_HOOKS": "session:start"` under `env`
+   in `~/.claude/settings.json`, appended if the key exists). Say what changed
+   and how to undo it.
 7. **Stop on the first request of a session:** the request usually lacked
    context; step 3 is the answer. If complete requests still stop,
    always-loaded context may be the trigger; `claude --safe-mode` confirms.
